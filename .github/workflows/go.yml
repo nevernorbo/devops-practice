@@ -11,6 +11,9 @@ on:
 
 jobs:
   build:
+    defaults:
+      run:
+        working-directory: ./miiyagi-api
 
     runs-on: ubuntu-latest
     strategy:
