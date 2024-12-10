@@ -6,7 +6,8 @@ import {
 import { Exercise } from "../../app/types";
 import { RootState } from "../../app/store";
 
-const apiAddr = "http://172.30.0.2:8080/api";
+// const apiAddr = "http://172.30.0.2:8080/api";
+const apiAddr = "http://api.miiyagi.dojo:8080/api";
 
 export const exercisesAdapter = createEntityAdapter({
     selectId: (exercise: Exercise) => exercise.id,

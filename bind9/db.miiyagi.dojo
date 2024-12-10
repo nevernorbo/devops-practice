@@ -1,0 +1,13 @@
+$TTL 604800
+@   IN  SOA miiyagi.dojo. admin.miiyagi.dojo. (
+                           1     ; Serial
+                      604800     ; Refresh
+                       86400     ; Retry
+                     2419200     ; Expire
+                      604800 )   ; Negative Cache TTL
+;
+@    IN  NS  ns.miiyagi.dojo.
+@    IN  A   172.30.0.3   ; This is the IP of the Redux container
+ns   IN  A   172.30.0.10  ; This is the IP of the Bind9 container
+www  IN  A   172.30.0.3   ; www subdomain points to Redux container
+api  IN  A   172.30.0.2   ; API

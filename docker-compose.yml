@@ -1,12 +1,10 @@
-version: '3.8'
-
 services:
   miiyagi-app:
     build:
-      context: ./miiyagi-app
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: Dockerfile_app
     volumes:
-      - ./miiyagi-app:/app
+      - .:/app
     ports:
       - "5173:5173"
     networks:
@@ -20,10 +18,10 @@ services:
   
   miiyagi-api:
     build:
-      context: ./miiyagi-api
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: Dockerfile_api
     volumes:
-      - ./miiyagi-api:/api
+      - .:/api
     ports:
       - "8080:8080"
     networks:

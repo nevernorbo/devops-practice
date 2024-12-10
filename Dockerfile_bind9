@@ -1,0 +1,7 @@
+FROM internetsystemsconsortium/bind9:9.18
+
+COPY bind9/named.conf /etc/bind/named.conf
+COPY bind9/db.miiyagi.dojo /etc/bind/db.miiyagi.dojo
+
+EXPOSE 53/tcp
+EXPOSE 53/udp
