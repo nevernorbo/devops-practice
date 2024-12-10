@@ -1,0 +1,47 @@
+version: '3.8'
+
+services:
+  miiyagi-app:
+    build:
+      context: ./miiyagi-app
+      dockerfile: Dockerfile
+    volumes:
+      - ./miiyagi-app:/app
+    ports:
+      - "5173:5173"
+    networks:
+      miiyagi-net:
+        ipv4_address: 172.30.0.3
+    depends_on:
+      miiyagi-api:
+        condition: service_healthy
+    tty: true
+    stdin_open: true
+  
+  miiyagi-api:
+    build:
+      context: ./miiyagi-api
+      dockerfile: Dockerfile
+    volumes:
+      - ./miiyagi-api:/api
+    ports:
+      - "8080:8080"
+    networks:
+      miiyagi-net:
+        ipv4_address: 172.30.0.2
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    tty: true
+    stdin_open: true
+
+networks:
+  miiyagi-net: 
+    driver: bridge
+    ipam: 
+      config:
+      - subnet: 172.30.0.0/16
+        gateway: 172.30.0.1

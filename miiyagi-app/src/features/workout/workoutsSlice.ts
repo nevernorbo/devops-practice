@@ -6,6 +6,8 @@ import {
 import { Exercise } from "../../app/types";
 import { RootState } from "../../app/store";
 
+const apiAddr = "http://172.30.0.2:8080/api";
+
 export const exercisesAdapter = createEntityAdapter({
     selectId: (exercise: Exercise) => exercise.id,
 });
@@ -13,7 +15,7 @@ export const exercisesAdapter = createEntityAdapter({
 export const fetchExercises = createAsyncThunk(
     "exercises/fetchExercises",
     async () => {
-        return await fetch("http://localhost:8080/api/exercises", {
+        return await fetch(`${apiAddr}/exercises`, {
             method: "GET",
             credentials: "include",
             headers: {
@@ -26,23 +28,20 @@ export const fetchExercises = createAsyncThunk(
 export const getExercisesForDate = createAsyncThunk(
     "exercises/getExercisesForDate",
     async (selected_date: string) => {
-        return await fetch(
-            `http://localhost:8080/api/exercises/fetch/${selected_date}`,
-            {
-                method: "GET",
-                credentials: "include",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-            }
-        ).then((res) => res.json());
+        return await fetch(`${apiAddr}/exercises/fetch/${selected_date}`, {
+            method: "GET",
+            credentials: "include",
+            headers: {
+                "Content-Type": "application/json",
+            },
+        }).then((res) => res.json());
     }
 );
 
 export const addExcercise = createAsyncThunk(
     "exercises/addExcercise",
     async (newExercise: any) => {
-        return await fetch(`http://localhost:8080/api/exercises/add`, {
+        return await fetch(`${apiAddr}/exercises/add`, {
             method: "POST",
             credentials: "include",
             headers: {
@@ -58,7 +57,7 @@ export const addExcercise = createAsyncThunk(
 export const deleteExercise = createAsyncThunk(
     "exercises/deleteExcercise",
     async (id: number) => {
-        return await fetch(`http://localhost:8080/api/exercises/delete/${id}`, {
+        return await fetch(`${apiAddr}/exercises/delete/${id}`, {
             method: "DELETE",
             credentials: "include",
             headers: {

@@ -1,6 +1,6 @@
 FROM golang:1.23.4-alpine3.21
 
-WORKDIR /docker-go
+WORKDIR /api
 
 # Installing dependencies
 COPY go.mod go.sum ./
@@ -9,7 +9,8 @@ RUN go mod download
 # Install gcc along with other build tools
 RUN apk add build-base
 
-COPY . .
+# Install curl for the health check
+RUN apk add --no-cache curl
 
 EXPOSE 8080
 
