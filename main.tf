@@ -17,18 +17,32 @@ resource "docker_network" "app_network" {
   internal = false
 }
 
+// 172.30.0.2
 module "miiyagi_api" {
   source = "./miiyagi-api"
 }
 
+// 172.30.0.3
 module "miiyagi_app" {
   source = "./miiyagi-app"
 }
 
+// 172.30.0.20
 module "nginx" {
   source = "./nginx"
 }
 
+// 172.30.0.10
 module "bind9" {
   source = "./bind9"
+}
+
+// 172.30.0.25
+module "prometheus" {
+  source = "./monitoring/prometheus"
+}
+
+// 172.30.0.26
+module "grafana" {
+  source = "./monitoring/grafana"
 }
