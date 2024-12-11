@@ -15,7 +15,7 @@ func main() {
 	models.ConnectDatabase()
 
 	router.Use(cors.New(cors.Config{
-		AllowOrigins:     []string{"http://172.30.0.3:5173", "http://miiyagi.dojo:5173"},
+		AllowOrigins:     []string{"http://172.30.0.3:5173", "http://172.30.0.3", "http://miiyagi.dojo:5173", "http://miiyagi.dojo"},
 		AllowMethods:     []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
 		AllowHeaders:     []string{"Origin", "Content-Type", "Authorization"},
 		ExposeHeaders:    []string{"Content-Length"},
