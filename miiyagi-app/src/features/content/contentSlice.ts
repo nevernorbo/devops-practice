@@ -1,11 +1,13 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export interface ContentState {
     exerciseEditorVisible: boolean;
+    updatedExerciseId: number | null;
 }
 
 const initialState: ContentState = {
     exerciseEditorVisible: false,
+    updatedExerciseId: null,
 };
 
 export const contentSlice = createSlice({
@@ -14,10 +16,16 @@ export const contentSlice = createSlice({
     reducers: {
         toggleExerciseEditorVisibility: (state) => {
             state.exerciseEditorVisible = !state.exerciseEditorVisible;
+            state.updatedExerciseId = null;
+        },
+        setUpdatedExerciseId: (state, action: PayloadAction<number | null>) => {
+            state.exerciseEditorVisible = true;
+            state.updatedExerciseId = action.payload;
         },
     },
 });
 
-export const { toggleExerciseEditorVisibility } = contentSlice.actions;
+export const { toggleExerciseEditorVisibility, setUpdatedExerciseId } =
+    contentSlice.actions;
 
 export default contentSlice.reducer;

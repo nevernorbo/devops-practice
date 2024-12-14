@@ -1,7 +1,12 @@
 import { Form, Input, Modal } from "antd";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { toggleExerciseEditorVisibility } from "./contentSlice";
-import { addExcercise } from "../workout/workoutsSlice";
+import {
+    addExcercise,
+    updateExercise,
+    workoutsSelectors,
+} from "../workout/workoutsSlice";
+import { useEffect } from "react";
 
 const formItemLayout = {
     labelCol: {
@@ -41,11 +46,31 @@ export const ExcerciseEditor = () => {
         (state) => state.content.exerciseEditorVisible
     );
 
+    const updatedExerciseId = useAppSelector(
+        (state) => state.content.updatedExerciseId
+    );
+
+    const updatedExercise = useAppSelector((state) =>
+        workoutsSelectors.selectById(state, updatedExerciseId as number)
+    );
+
     const selected_date = useAppSelector(
         (state) => state.calendar.selected_date
     );
 
     const [form] = Form.useForm();
+
+    useEffect(() => {
+        if (updatedExercise) {
+            form.setFieldsValue({
+                name: updatedExercise.name,
+                sets: updatedExercise.sets,
+                reps: updatedExercise.repetitions,
+            });
+        } else {
+            form.resetFields();
+        }
+    }, [updatedExercise]);
 
     return (
         <Modal
@@ -54,21 +79,33 @@ export const ExcerciseEditor = () => {
             onOk={() => {
                 const { name, sets, reps } = form.getFieldsValue();
 
-                dispatch(
-                    addExcercise({
-                        date: selected_date,
-                        name: name,
-                        sets: Number(sets),
-                        repetitions: Number(reps),
-                    })
-                );
+                if (updatedExerciseId) {
+                    dispatch(
+                        updateExercise({
+                            id: updatedExerciseId,
+                            date: selected_date,
+                            name: name,
+                            sets: Number(sets),
+                            repetitions: Number(reps),
+                        })
+                    );
+                } else {
+                    dispatch(
+                        addExcercise({
+                            date: selected_date,
+                            name: name,
+                            sets: Number(sets),
+                            repetitions: Number(reps),
+                        })
+                    );
+                }
 
                 dispatch(toggleExerciseEditorVisibility());
 
                 form.resetFields();
             }}
             onCancel={() => dispatch(toggleExerciseEditorVisibility())}
-            okText="Add"
+            okText={updatedExerciseId ? "Update" : "Add"}
         >
             <Form
                 layout="horizontal"

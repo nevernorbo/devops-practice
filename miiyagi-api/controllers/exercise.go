@@ -65,3 +65,30 @@ func FetchExercisesForDate(c *gin.Context) {
 
 	c.JSON(http.StatusOK, gin.H{"data": exercises})
 }
+
+// POST /exercises/update/:id
+func UpdateExercise(c *gin.Context) {
+	// Get model if exist
+	var exercise models.Exercise
+	id := exercise.ID
+
+	if err := models.DB.Where("id = ?", c.Param("id")).First(&exercise).Error; err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Record not found!"})
+		return
+	}
+
+	// Validate input
+	var input models.Exercise
+	if err := c.ShouldBindJSON(&input); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	// Update exercise
+	if err := models.DB.Model(&exercise).Updates(input).Error; err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to update exercise"})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{"data": id})
+}

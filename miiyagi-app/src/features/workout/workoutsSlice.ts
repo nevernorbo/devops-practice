@@ -55,6 +55,24 @@ export const addExcercise = createAsyncThunk(
     }
 );
 
+export const updateExercise = createAsyncThunk(
+    "exercises/updateExcercise",
+    async (newExercise: any) => {
+        await fetch(`${apiAddr}/exercises/update/${newExercise.id}`, {
+            method: "POST",
+            credentials: "include",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(newExercise),
+        }).then((res) => {
+            return res.json();
+        });
+
+        return { id: newExercise.id, changes: newExercise };
+    }
+);
+
 export const deleteExercise = createAsyncThunk(
     "exercises/deleteExcercise",
     async (id: number) => {
@@ -91,6 +109,13 @@ export const workoutsSlice = createSlice({
         });
         builder.addCase(deleteExercise.fulfilled, (state, action) => {
             exercisesAdapter.removeOne(state, action.payload.data);
+        });
+        builder.addCase(updateExercise.fulfilled, (state, action) => {
+            state.loading = false;
+            exercisesAdapter.updateOne(state, {
+                id: action.payload.id,
+                changes: action.payload.changes,
+            });
         });
     },
 });

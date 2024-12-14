@@ -23,7 +23,10 @@ import {
     EditOutlined,
     PlusCircleOutlined,
 } from "@ant-design/icons";
-import { toggleExerciseEditorVisibility } from "../content/contentSlice";
+import {
+    setUpdatedExerciseId,
+    toggleExerciseEditorVisibility,
+} from "../content/contentSlice";
 
 const options: Intl.DateTimeFormatOptions = {
     weekday: "long",
@@ -45,7 +48,6 @@ export const WorkoutDetails = () => {
 
     const loading = useAppSelector((state) => state.workouts.loading);
     const list = useAppSelector(workoutsSelectors.selectAll);
-    console.log(list);
 
     useEffect(() => {
         dispatch(getExercisesForDate(selected_date));
@@ -111,6 +113,11 @@ export const WorkoutDetails = () => {
                                     <EditOutlined
                                         className="icon"
                                         key="list-item-edit"
+                                        onClick={() => {
+                                            dispatch(
+                                                setUpdatedExerciseId(item.id)
+                                            );
+                                        }}
                                     />
                                     <Popconfirm
                                         title="Delete exercise"

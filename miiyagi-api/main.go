@@ -79,6 +79,7 @@ func main() {
 		router_group.POST("/exercises/add", controllers.CreateExercise)
 		router_group.DELETE("/exercises/delete/:id", controllers.DeleteExercise)
 		router_group.GET("/exercises/fetch/:date", controllers.FetchExercisesForDate)
+		router_group.POST("/exercises/update/:id", controllers.UpdateExercise)
 	}
 
 	router.Run()

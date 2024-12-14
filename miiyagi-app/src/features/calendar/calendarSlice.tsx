@@ -15,7 +15,6 @@ export const calendarSlice = createSlice({
     initialState,
     reducers: {
         selectDate: (state, action: PayloadAction<string>) => {
-            console.log(action.payload);
             state.selected_date = action.payload;
         },
     },
