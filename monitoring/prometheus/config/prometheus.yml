@@ -7,8 +7,16 @@ scrape_configs:
       static_configs:
           - targets: ["localhost:9090"]
 
-    - job_name: "nodejs"
+    # Supposed to scrape the frontend, won't work because Vite doesn't run a node server
+    - job_name: "app_monitor"
       scrape_interval: 5s
       static_configs:
           - targets:
                 - "172.30.0.3:5173"
+
+    # Monitoring go with prometheus
+    - job_name: "api_monitor"
+      scrape_interval: 5s
+      static_configs:
+          - targets:
+                - "172.30.0.2:8080"
