@@ -42,9 +42,9 @@ Valamint szerkeszthetjük és törölhetjük a lista elemeket a szerkesztés és
 
 #### Felhasznált technológiák
 
-Frontend: Redux toolkit
-Backend: Go REST API a "GORM" nevű ORM-el és SQLite driverrel
-Database: SQLite
+Frontend: Redux toolkit 
+Backend: Go REST API a "GORM" nevű ORM-el és SQLite driverrel 
+Database: SQLite 
 
 ---
 
