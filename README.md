@@ -6,11 +6,12 @@
 
 #### Futtatás
 
--   git clone https://github.com/nevernorbo/devops-beadando-2024-lev.git
--   cd devops-beadando-2024-lev
--   terraform init
--   terraform plan
--   terraform apply (és "yes")
+-   `git clone https://github.com/nevernorbo/devops-beadando-2024-lev.git`
+-   `cd devops-beadando-2024-lev`
+-   `alias terraform='sudo docker run -it --rm -v "$PWD":/workspace -v /var/run/docker.sock:/var/run/docker.sock -w /workspace hashicorp/terraform:light'`
+-   `terraform init`
+-   `terraform plan`
+-   `terraform apply` (és "yes")
 -   http://miiyagi.dojo
     (ehhez kell a következő sor az /etc/host fileba a következő két sor:
     `172.30.0.2 api.miiyagi.dojo`
