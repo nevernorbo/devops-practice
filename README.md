@@ -36,7 +36,7 @@ Egy egyszerű web alkalmazás standard CRUD funkcionalitással edzéstervek köv
 
 A bal oldalon lévő naptárból, napot választva lekérdezhetjük a mentett bejegyzéseinket.
 Hozzáadhatunk új bejegyzést az "Add exercise" gomb segítségével.
-Valamint törölhetünk a listából a szemetes ikonra kattintva.
+Valamint szerkeszthetjük és törölhetjük a lista elemeket a szerkesztés és szemetes ikonokra kattintva.
 
 ---
 
