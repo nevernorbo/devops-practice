@@ -1,25 +1,23 @@
-# Miiyagi edzéskövető
-
-#### Devops 2024 beadandó
-
+# Miiyagi workout planner
+### A project using modern devops tooling
 ---
 
-#### Futtatás
+#### Usage
 
--   `git clone https://github.com/nevernorbo/devops-beadando-2024-lev.git`
--   `cd devops-beadando-2024-lev`
+-   `git clone https://github.com/nevernorbo/devops-practice.git`
+-   `cd devops-practice`
 -   `alias terraform='sudo docker run -it --rm -v "$PWD":/workspace -v /var/run/docker.sock:/var/run/docker.sock -w /workspace hashicorp/terraform:light'`
 -   `terraform init`
 -   `terraform plan`
--   `terraform apply` (és "yes")
+-   `terraform apply` (and "yes")
 -   http://miiyagi.dojo
-    (ehhez kell a következő sor az /etc/host fileba a következő két sor:
+    (this will need the following two lines in the /etc/host file:
     `172.30.0.2 api.miiyagi.dojo`
     `172.30.0.20 miiyagi.dojo`)
 
 ---
 
-#### Címek és portok:
+#### IP addresses and port numbers:
 
 ```
 Web app:        172.30.0.3:5173
@@ -30,31 +28,31 @@ Grafana:        172.30.0.26:3000
 
 ---
 
-#### Az alkalmazásról
+#### About the application
 
-Egy egyszerű web alkalmazás standard CRUD funkcionalitással edzéstervek követéséhez (vagy akár teendőkhöz, jegyzeteléshez).
+A very simple web application with standard CRUD functionality for tracking workout plans (or even for todos and note-taking).
 
-A bal oldalon lévő naptárból, napot választva lekérdezhetjük a mentett bejegyzéseinket.
-Hozzáadhatunk új bejegyzést az "Add exercise" gomb segítségével.
-Valamint szerkeszthetjük és törölhetjük a lista elemeket a szerkesztés és szemetes ikonokra kattintva.
-
----
-
-#### Felhasznált technológiák
-
-Frontend: Redux toolkit  
-Backend: Go REST API a "GORM" nevű ORM-el és SQLite driverrel  
-Database: SQLite  
+You can select a day from the calendar on the left to query your saved entries for that day.
+You can add new entries using the "Add exercise" button.
+You can also edit and delete list items by clicking the edit and trash icons.
 
 ---
 
-#### Felhasznált devops eszközök
+#### Technologies used
+
+Frontend: Redux toolkit
+Backend: REST API built in Golang, using Gin, the "GORM" ORM and the SQLite driver  
+Database: SQLite
+
+---
+
+#### Devops tools used
 
 -   Docker
 -   Git
--   [Github actions](https://github.com/nevernorbo/devops-beadando-2024-lev/actions)
-    -   CodeQL statikus kódelemző
-    -   Go projekt buildelése és az ahhoz tartozó tesztek futtatása
+-   Github actions (currently unused)
+    -   CodeQL static code analysis
+    -   Golang build and test tool
 -   Terraform
 -   Prometheus
 -   Grafana
